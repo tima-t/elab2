@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../public/css/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+<div id="main">
+    <div class="row marginTop">
+        <div class=" col-sm-4 col-md-1 col-md-offset-1">
+            <img src="../public/img/logo.png" alt="logo">
+        </div>
+
+        <div class="col-md-3">
+            <h1>eLab Library</h1>
+        </div>
+
+        <div class="col-md-2 col-sm-1 col-md-offset-1 " id="all">
+            <a href="login" class="btn btn-success">All books &nbsp &nbsp <i class="fa fa-book"></i></a>
+        </div>
+        <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="add">
+            <a href="login" class="btn btn-success">Login &nbsp &nbsp <i class="fa fa-key"></i></a>
+        </div>
+
+    </div>
+
+    <form role="form" action="home" method="post" enctype="multipart/form-data" class="marginTop">
+        <div class="row clearPadMar">
+            <div class="form-group col-md-4 col-md-offset-1">
+                 <input type="text" name="title" class="form-control" id="" placeholder="Book title">
+             </div>
+             <div class="form-group col-md-4 col-md-offset-1">
+                 <input type="text" name="author" class="form-control" id="" placeholder="Publish date">
+             </div>
+        </div>
+        <div class="row clearPadMar">
+            <div class="form-group col-md-4 col-md-offset-1">
+                <input type="text" name="date" class="form-control" id="" placeholder="Author">
+            </div>
+            <div class="form-group col-md-4 col-md-offset-1     ">
+                <select name="format" class="form-control" id="" >
+                    <option selected="selected" value="-1">Select format</option>
+                    <option value="a4">A4</option>
+                    <option value="a3">A3</option>
+                 </select>
+            </div>
+        </div>
+        <div class="row clearPadMar">
+            <div class="form-group form-group col-md-4 col-md-offset-1">
+                <input type="text" name="count" class="form-control" id="" placeholder="Page count">
+            </div>
+            <div class="form-group form-group col-md-4 col-md-offset-1 ">
+                <textarea rows="2"  name="resume" class="form-control">Resume:
+                    </textarea>
+            </div>
+            <div class="form-group form-group col-md-4 col-md-offset-1">
+                <input type="text" name="isbn" class="form-control" id="" placeholder="Isbn">
+            </div>
+        </div>
+
+
+
+        <div class="row marginTop marginBottom">
+            <div class="col-md-offset-1 col-md-5 fileinput fileinput-new " data-providers="fileinput"> <i class="fa fa-picture-o fa-2x" style="color:greenyellow"></i> &nbsp &nbsp<input type="file" name="fileToUpload" id="chooseF"> </div>
+            <div class="col-md-2 col-md-offset-3"><button type="submit" class="btn btn-success ">Submit &nbsp &nbsp <i class="fa fa-arrow-circle-o-right"></i></button></div>
+        </div>
+    </form>
+
+</div>
+</body>
+<script src="../public/js/jquery/dist/jquery.min.js"></script>
+<script src="../public/css/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src='../public/js/jquery-input-file-text.js'></script>
+<script>
+    $(document).ready(function() {
+        $('#chooseF').inputFileText( { text: 'Browse' } );
+    });
+</script>
+
+
+</html>

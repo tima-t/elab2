@@ -9,7 +9,11 @@ $app->get('/user', function () use ($app) {
 	echo json_encode($users);
 });
 
+$app->get('/login', function () use ($app) {
 
+
+	$app->render('login.html');
+});
 
 $app->post('/login', function () use ($app) {
 	$clean=array();
