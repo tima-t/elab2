@@ -31,15 +31,22 @@ $app->post('/login', function () use ($app) {
 		
 
         if($result){
-			echo "right";
-			$app->render('login.html', array('hello' => $hello));
+
+			$_SESSION['logged']=true;
+			var_dump($_SESSION[logged]);
+			$success="welcome,you are loged in our system";
+
+			$app->render('serverMsg/serverResp.php', array('success' =>$success));
 		}
 		else{
-			echo"false";
+			$error="You have entered wrong Username or Password";
+			$app->render('serverMsg/serverResp.php', array('error_msg' =>$error ));
 		}
     }
     else{
-        echo"false";
+		var_dump($_SESSION[logged]);
+		$error="The size of the name and password should be over 3 symbols";
+		$app->render('serverMsg/serverResp.php', array('error_msg' =>$error ));
     }
 	
 	

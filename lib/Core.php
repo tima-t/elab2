@@ -20,6 +20,7 @@ class Core {
         $password = Config::read('db.password');
 
         $this->dbh = new PDO($dsn, $user, $password);
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public static function getInstance() {

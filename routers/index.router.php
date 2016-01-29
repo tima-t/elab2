@@ -8,12 +8,16 @@
 });*/
 
 $app->get('/', function () use ($app) {
-    $app->render('home.html', array('hello' => $hello));
+    $app->render('home.html');
+});
+
+$app->get('/allBooks', function () use ($app) {
+    $app->render('allBooks.html');
 });
 
 $app->post('/home', function () use ($app) {
     $uploader= new \models\FileUploader();
-    $uploader->uploadFile();
+    $uploadMessage=$uploader->uploadFile();
     $title=$_POST['title'];
     $publish= $_POST['date'];
     $author=$_POST['author'];
@@ -26,7 +30,15 @@ $app->post('/home', function () use ($app) {
     $image=$target_file;
 
     $insertBook =new models\Book($title,$publish,$author,$format,$count,$resume,$isbn,$image);
-    $insertBook->insert();
-    //$app->render('home.html', array('hello' => $hello));
+    if($insertBook->insert()){
+
+        $success="your file has beed uploaded successfully";
+        $app->render('serverMsg/serverResp.php', array('success' =>$success));
+
+    }
+    else{
+        $app->render('serverMsg/serverResp.php',array('error_msg'=>("Image: ".$uploadMessage."\n"."Something get wrong, you have to fill all fields, publish date and Page count should be  numbers")));
+    };
+
 });
 

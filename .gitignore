@@ -1,4 +1,6 @@
 /nbproject/
 /.idea/
+*.jpg
+*.png
 /vendor/
 composer.lock

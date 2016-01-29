@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-md-2 col-sm-1 col-md-offset-1 " id="all">
-            <a href="login" class="btn btn-success">All books &nbsp &nbsp <i class="fa fa-book"></i></a>
+            <a href="allBooks" class="btn btn-success">All books &nbsp &nbsp <i class="fa fa-book"></i></a>
         </div>
         <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="add">
             <a href="login" class="btn btn-success">Login &nbsp &nbsp <i class="fa fa-key"></i></a>
@@ -34,41 +34,41 @@
     <form role="form" action="home" method="post" enctype="multipart/form-data" class="marginTop">
         <div class="row clearPadMar">
             <div class="form-group col-md-4 col-md-offset-1">
-                 <input type="text" name="title" class="form-control" id="" placeholder="Book title">
+                 <input type="text" name="title" class="form-control" id="" placeholder="Book title" required>
              </div>
              <div class="form-group col-md-4 col-md-offset-1">
-                 <input type="text" name="author" class="form-control" id="" placeholder="Publish date">
+                 <input type="text" name="date" class="form-control" id="" placeholder="Publish date" required>
              </div>
         </div>
         <div class="row clearPadMar">
             <div class="form-group col-md-4 col-md-offset-1">
-                <input type="text" name="date" class="form-control" id="" placeholder="Author">
+                <input type="text" name="author" class="form-control"  placeholder="Author" required>
             </div>
             <div class="form-group col-md-4 col-md-offset-1     ">
-                <select name="format" class="form-control" id="" >
+                <select name="format" class="form-control" id="" required>
                     <option selected="selected" value="-1">Select format</option>
-                    <option value="a4">A4</option>
-                    <option value="a3">A3</option>
+                    <option value="A4">A4</option>
+                    <option value="A3">A3</option>
                  </select>
             </div>
         </div>
         <div class="row clearPadMar">
             <div class="form-group form-group col-md-4 col-md-offset-1">
-                <input type="text" name="count" class="form-control" id="" placeholder="Page count">
+                <input type="text" name="count" class="form-control"  placeholder="Page count" required>
             </div>
             <div class="form-group form-group col-md-4 col-md-offset-1 ">
                 <textarea rows="2"  name="resume" class="form-control">Resume:
                     </textarea>
             </div>
             <div class="form-group form-group col-md-4 col-md-offset-1">
-                <input type="text" name="isbn" class="form-control" id="" placeholder="Isbn">
+                <input type="text" name="isbn" class="form-control"  placeholder="Isbn" required>
             </div>
         </div>
 
 
 
         <div class="row marginTop marginBottom">
-            <div class="col-md-offset-1 col-md-5 fileinput fileinput-new " data-providers="fileinput"> <i class="fa fa-picture-o fa-2x" style="color:greenyellow"></i> &nbsp &nbsp<input type="file" name="fileToUpload" id="chooseF"> </div>
+            <div class="col-md-offset-1 col-md-5 fileinput fileinput-new " data-providers="fileinput"> <i class="fa fa-picture-o fa-2x" style="color:greenyellow"></i> &nbsp &nbsp<input  type="file" name="fileToUpload" id="chooseF"> </div>
             <div class="col-md-2 col-md-offset-3"><button type="submit" class="btn btn-success ">Submit &nbsp &nbsp <i class="fa fa-arrow-circle-o-right"></i></button></div>
         </div>
     </form>

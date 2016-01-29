@@ -81,7 +81,7 @@ jQuery.ajaxTransport( function( options ) {
 
 								// Support: IE9
 								// On a manual native abort, IE9 throws
-								// errors on any property access that is not readyState
+								// serverMsg on any property access that is not readyState
 								if ( typeof xhr.status !== "number" ) {
 									complete( 0, "error" );
 								} else {

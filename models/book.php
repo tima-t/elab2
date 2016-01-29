@@ -63,16 +63,33 @@ class Book
 
 
     public function insert(){
+
         if(isset($this->title) && isset($this->image) &&
             isset($this->isbn) && isset($this->count) &&
             isset($this->resume) && isset($this->format) &&
-            isset($this->author) && isset($this->publish)){
+            isset($this->author) && isset($this->publish)&&
+            strlen($this->title)>0 && strlen($this->image)>0 &&
+            strlen($this->isbn)>0 && strlen($this->count)>0 &&
+            strlen($this->resume)>0 && strlen($this->format)>0 &&
+            strlen($this->author)>0 && strlen($this->publish)>0
+            && is_numeric($this->count) && is_numeric($this->publish) && ($this->format =="A4" || $this->format=="A3") ) {
 
-            $stmt =$this->core->dbh->prepare( "INSERT INTO books (title, publish, author, countp,format,resume,isbn,image)
-					VALUES (?,?,?,?,?,?,?,?,)");
-            $result =$stmt->execute(array($this->title,$this->publish,$this->author,
-                $this->count,$this->format,$this->resume,$this->isbn,$this->image));
-            var_dump($result);
+            try {
+                $stmt = $this->core->dbh->prepare("INSERT INTO books (title, publish, author, countp,format,resume,isbn,image)
+					VALUES (?,?,?,?,?,?,?,?)");
+                $result = $stmt->execute(array($this->title, $this->publish, $this->author,
+                    $this->count, $this->format, $this->resume, $this->isbn, $this->image));
+                return true;
+            }
+            catch(PDOException $exception){
+                return false;
+            }
+
+        }
+
+        else{
+
+            return false;
         }
 
     }

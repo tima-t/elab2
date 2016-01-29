@@ -59,7 +59,6 @@ class User {
 		$result = $stmt->execute(array($name,$pass));
 		$row_count = $stmt->rowCount();
 		if($row_count == 1){
-			echo "I am in";
 			return true;
 		}
 		else{
