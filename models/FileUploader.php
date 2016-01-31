@@ -11,10 +11,10 @@ namespace models;
 
 class FileUploader
 {
-    public function uploadFile(){
+    public function uploadFile($unique){
 
 $target_dir = "../uploads/";
-$target_file = $target_dir . round(microtime(true)) . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . $unique . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image

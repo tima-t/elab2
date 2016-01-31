@@ -25,9 +25,16 @@
         <div class="col-md-2 col-sm-1 col-md-offset-1 " id="all">
             <a href="allBooks" class="btn btn-success">All books &nbsp &nbsp <i class="fa fa-book"></i></a>
         </div>
-        <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="add">
-            <a href="login" class="btn btn-success">Login &nbsp &nbsp <i class="fa fa-key"></i></a>
+        {% if logged %}
+        <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="logout">
+            <a href="login" class="btn btn-success">{{logged}} &nbsp &nbsp <i class="fa fa-key"></i></a>
         </div>
+        {% else %}
+        <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="login">
+            <a href="login" class="btn btn-success">{{notLogged}} &nbsp &nbsp <i class="fa fa-key"></i></a>
+        </div>
+        {%endif%}
+
 
     </div>
 

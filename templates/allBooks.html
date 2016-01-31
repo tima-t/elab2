@@ -22,10 +22,42 @@
             <h1>eLab Library</h1>
         </div>
 
-        <div class="col-md-1 col-md-offset-4" id="add">
+        <div class="col-md-1 col-md-offset-2" id="add">
             <a href="./" class="btn btn-success">New Book &nbsp &nbsp <i class="fa fa-plus-circle"></i></a>
         </div>
+        <div class="col-md-2 col-md-offset-1" id="logout">
+            <a href="./?out=true" style="width:100%" class="btn btn-success">Logout &nbsp &nbsp <i class="fa fa-sign-out"></i></a>
+        </div>
     </div>
+    <div class="row  clearPadMar">
+        <div class="col-md-2 col-md-offset-1 " id="div0">
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div1">
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div2" >
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div3">
+
+        </div>
+    </div>
+    <div class="row marginTop clearPadMar ">
+        <div class="col-md-2 col-md-offset-1" id="div4">
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div5">
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div6">
+
+        </div>
+        <div class="col-md-2 col-md-offset-1 " id="div7">
+
+        </div>
+    </div>
+
     <div class="row marginTop marginBottom">
         <div class="col-md-1 col-md-offset-1" id="back">
             <button  class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i> &nbsp Back &nbsp &nbsp </button>
@@ -42,4 +74,135 @@
 </body>
 <script src="../public/js/jquery/dist/jquery.min.js"></script>
 <script src="../public/css/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+    var curPos,
+        counter= 0,
+        books = JSON.parse('{{ books|json_encode|raw|raw }}'),
+        bookLen=books.length,
+        $container="<div>";
+
+    $('#next').on("click",next);
+    $("#back").on("click",back);
+    $("#back").hide();
+
+
+    for(counter; counter<bookLen; counter++){
+
+        $container+="<img style='max-width:100% ; border:2px solid gray' src=" + books[counter].image + " />";
+        $container+="<p> title: "+ books[counter].title+"</p>";
+        $container+="<p> publish: "+ books[counter].publish+"</p>";
+        $container+="<p> author: "+ books[counter].author+"</p>";
+        $container+="<p> countp: "+ books[counter].countp+"</p>";
+        $container+="<p> format: "+ books[counter].format+"</p>";
+        $container+="<p> resume: "+ books[counter].resume+"</p>";
+        $container+="<p> isbn: "+ books[counter].isbn+"</p>";
+        $container+="<p> id: "+ books[counter].id+"</p>";
+
+        $("#div"+counter).addClass("bord").append($container);
+        $container="";
+        if(counter==7){
+            curPos=counter+1;
+            counter=0;
+           break;
+        }
+
+
+    }
+
+
+    function next(){
+
+
+        $("#back").show();
+        $(".bord").empty();
+        $(".bord").removeClass("bord");
+        var curPosTemp=curPos;
+        console.log(curPos);
+        if(curPos===0){
+            $(this).hide();
+        }
+
+        for(curPos; curPos<bookLen; curPos++){
+
+            $container+="<img style='max-width:100% ; border:2px solid gray' src=" + books[counter].image + " />";
+            $container+="<p> title: "+ books[curPos].title+"</p>";
+            $container+="<p> publish: "+ books[curPos].publish+"</p>";
+            $container+="<p> author: "+ books[curPos].author+"</p>";
+            $container+="<p> countp: "+ books[curPos].countp+"</p>";
+            $container+="<p> format: "+ books[curPos].format+"</p>";
+            $container+="<p> resume: "+ books[curPos].resume+"</p>";
+            $container+="<p> isbn: "+ books[curPos].isbn+"</p>";
+            $container+="<p> id: "+ books[curPos].id+"</p>";
+
+
+            $("#div"+counter).addClass("bord").append($container);
+
+            $container="";
+            if(curPos==bookLen-1){
+                $(this).hide();
+                curPos=(8+curPosTemp);
+                counter=0;
+                break;
+
+            }
+
+
+            if(counter==7 ){
+                curPos++;
+                counter=0;
+                break;
+            }
+            counter++;
+
+
+        }
+    }
+
+    function back(){
+        $("#next").show();
+        $(".bord").empty();
+        $(".bord").removeClass("bord");
+        curPos-=16;
+        if(curPos<0){
+            $("#next").hide();
+            $(this).hide();
+        }
+
+        for(counter; counter<8; counter++){
+
+            $container+="<img style='max-width:100% ; border:2px solid gray' src=" + books[counter].image + " />";
+            $container+="<p> title: "+ books[curPos].title+"</p>";
+            $container+="<p> publish: "+ books[curPos].publish+"</p>";
+            $container+="<p> author: "+ books[curPos].author+"</p>";
+            $container+="<p> countp: "+ books[curPos].countp+"</p>";
+            $container+="<p> format: "+ books[curPos].format+"</p>";
+            $container+="<p> resume: "+ books[curPos].resume+"</p>";
+            $container+="<p> isbn: "+ books[curPos].isbn+"</p>";
+            $container+="<p> id: "+ books[curPos].id+"</p>";
+
+
+            $("#div"+counter).addClass("bord").append($container);
+
+            $container="";
+
+            if(curPos <= 0){
+                $(this).hide();
+            }
+
+            if(counter==7){
+                curPos++;
+                counter=0;
+                break;
+            }
+            curPos++;
+
+
+        }
+
+
+    }
+
+
+
+</script>
 </html>

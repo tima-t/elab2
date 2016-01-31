@@ -24,43 +24,25 @@ class Book
     private $core;
     private $validator;
 
+
+
+
     function __construct($title,$publish,$author,$format,$count,$resume,$isbn,$image){
         $this->core=\lib\core::getInstance();
         $this->validator=\lib\Validator::getInstance();
 
-        if($this->validator->isNotEmpty($title)){
-            $this->title= $this->validator->clean($title);
-        }
-
-        if($this->validator->isNotEmpty($publish)){
-            $this->publish= $this->validator->clean($publish);
-        }
-
-        if($this->validator->isNotEmpty($author)){
-            $this->author= $this->validator->clean($author);
-        }
-
-        if($this->validator->isNotEmpty($format)){
-            $this->format= $this->validator->clean($format);
-        }
-
-        if($this->validator->isNotEmpty($resume)){
-            $this->resume= $this->validator->clean($resume);
-        }
-
-        if($this->validator->isNotEmpty($count)){
-            $this->count= $this->validator->clean($count);
-        }
-
-        if($this->validator->isNotEmpty($isbn)){
-            $this->isbn= $this->validator->clean($isbn);
-        }
-
-        if($this->validator->isNotEmpty($image)){
-            $this->image= $this->validator->clean($image);
-        }
+        $thisData = array(&$this->title,&$this->publish,&$this->author,&$this->format,&$this->count, &$this->resume,
+            &$this->isbn,&$this->image);
+        $outData = array($title,$publish,$author,$format,$count,$resume,$isbn,$image);
+        $this->validate($thisData,$outData);
     }
 
+    public  static function getAll(){
+        $stmt= \lib\core::getInstance()->dbh->prepare("select * from books ORDER By publish DESC ");
+         $stmt->execute();
+        $books= $stmt->fetchAll();
+        return $books;
+    }
 
     public function insert(){
 
@@ -77,7 +59,7 @@ class Book
             try {
                 $stmt = $this->core->dbh->prepare("INSERT INTO books (title, publish, author, countp,format,resume,isbn,image)
 					VALUES (?,?,?,?,?,?,?,?)");
-                $result = $stmt->execute(array($this->title, $this->publish, $this->author,
+                 $stmt->execute(array($this->title, $this->publish, $this->author,
                     $this->count, $this->format, $this->resume, $this->isbn, $this->image));
                 return true;
             }
@@ -89,8 +71,29 @@ class Book
 
         else{
 
+
             return false;
         }
+
+    }
+
+    private function validate($thisData,$outData){
+        if(count($thisData)== count($outData)){
+
+            $len=count($thisData);
+            for($i=0;$i<$len;$i++){
+                if($this->validator->isNotEmpty($outData[$i])){
+
+                    $thisData[$i]= $this->validator->clean($outData[$i]);
+                }
+            }
+
+
+        }
+        else{
+            throw new \Exception;
+        }
+        return true;
 
     }
 

@@ -2,6 +2,8 @@
 
 require '../vendor/autoload.php';
 require '../config.php';
+session_cache_limiter(false);
+session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 // Setup custom Twig view
 $twigView = new \Slim\Views\Twig();

@@ -1,23 +1,35 @@
 <?php
 
-// GET index route
-/*$app->get('/', function () use ($app) {
-    $oStuff = new models\Stuff();
-    $hello = $oStuff->setStuff();
-    $app->render('index.html', array('hello' => $hello));
-});*/
+
 
 $app->get('/', function () use ($app) {
-    $app->render('home.html');
+    if(isset($_GET['out'])){
+        unset($_SESSION['logged']);
+    }
+
+    if(isset($_SESSION['logged'])) {
+        $app->render('home.html', array("logged" => "Logout"));
+    }
+    else{
+        $app->render('home.html', array("notLogged" => "Login"));
+    }
 });
 
 $app->get('/allBooks', function () use ($app) {
-    $app->render('allBooks.html');
+    if($_SESSION['logged']) {
+        $books = \models\Book::getAll();
+
+        $app->render('allBooks.html', array("books" => $books));
+    }
+    else{
+        $app->render('serverMsg/serverResp.php',array('error_msg'=>"in order to see all books you have to login"));
+    }
 });
 
 $app->post('/home', function () use ($app) {
-    $uploader= new \models\FileUploader();
-    $uploadMessage=$uploader->uploadFile();
+    $unique=round(microtime(true));
+    $uploader= new \models\FileUploader($unique);
+    $uploadMessage=$uploader->uploadFile($unique);
     $title=$_POST['title'];
     $publish= $_POST['date'];
     $author=$_POST['author'];
@@ -26,11 +38,11 @@ $app->post('/home', function () use ($app) {
     $resume = $_POST['resume'];
     $isbn= $_POST['isbn'];
     $target_dir = "../uploads/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir .$unique. basename($_FILES["fileToUpload"]["name"]);
     $image=$target_file;
 
-    $insertBook =new models\Book($title,$publish,$author,$format,$count,$resume,$isbn,$image);
-    if($insertBook->insert()){
+    $book =new models\Book($title,$publish,$author,$format,$count,$resume,$isbn,$image);
+    if($book->insert()){
 
         $success="your file has beed uploaded successfully";
         $app->render('serverMsg/serverResp.php', array('success' =>$success));

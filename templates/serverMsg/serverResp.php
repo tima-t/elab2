@@ -25,9 +25,11 @@
         <div class="col-md-2 col-sm-1 col-md-offset-1 " id="all">
             <a href="./" class="btn btn-success">Go back to home &nbsp<i class="fa fa-home"></i></i></a>
         </div>
+        {% if error_msg %}
         <div class="col-md-2 col-sm-1 col-sm-offset-2 col-md-offset-1" id="add">
             <a href="login" class="btn btn-success">Login &nbsp &nbsp <i class="fa fa-key"></i></a>
         </div>
+        {% endif%}
 
     </div>
     {% if error_msg %}
@@ -39,7 +41,7 @@
 
     {% if success%}
     <div class="row alert-success clearPadMar"  style="text-align: center">
-        <h2 class="marginBottom">{{success}}</h2>
+        <h2 class="marginBottom">{{success |nl2br}}</h2>
 
 
     </div>

@@ -19,12 +19,12 @@ body{
     margin-top: 5%;
 }
 
-#add,#all{
+#add,#all,#logout,#login{
     margin-top: 25px;
 }
 
 
-#usr,#pwd{
+#usr,#pwd,#mail{
     width:40%;
     margin-left: 27%;
 }
@@ -43,4 +43,10 @@ body{
     padding:0;
     margin:0;
 }
+
+.bord{
+    border:1px solid #5CB85C;
+}
+
+
 
